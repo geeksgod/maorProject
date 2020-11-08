@@ -13,7 +13,7 @@ class HParams:
     reduction_rate = 4  # melspectrogram reduction rate, don't change because SSRN is using this rate
     n_fft = 2048 # fft points (samples)
     n_mels = 80  # Number of Mel banks to generate
-    power = 1.5  # Exponent for amplifying the predicted magnitude
+    power = 2 # Exponent for amplifying the predicted magnitude
     n_iter = 50  # Number of inversion iterations
     preemphasis = .97
     max_db = 100
@@ -23,8 +23,8 @@ class HParams:
     frame_length = 0.05  # seconds
     hop_length = int(sr * frame_shift)  # samples. =276.
     win_length = int(sr * frame_length)  # samples. =1102.
-    max_N = 180  # Maximum number of characters.
-    max_T = 210  # Maximum number of mel frames.
+    max_N = 700 # Maximum number of characters.
+    max_T = 1000 # Maximum number of mel frames.
 
     e = 128  # embedding dimension
     d = 256  # Text2Mel hidden unit dimension
@@ -34,14 +34,14 @@ class HParams:
 
     # Text2Mel network options
     text2mel_lr = 0.005  # learning rate
-    text2mel_max_iteration = 300000  # max train step
+    text2mel_max_iteration = 21000 # max train step
     text2mel_weight_init = 'none'  # 'kaiming', 'xavier' or 'none'
     text2mel_normalization = 'layer'  # 'layer', 'weight' or 'none'
     text2mel_basic_block = 'gated_conv'  # 'highway', 'gated_conv' or 'residual'
 
     # SSRN network options
     ssrn_lr = 0.0005  # learning rate
-    ssrn_max_iteration = 150000  # max train step
+    ssrn_max_iteration = 10500 # max train step
     ssrn_weight_init = 'kaiming'  # 'kaiming', 'xavier' or 'none'
     ssrn_normalization = 'weight'  # 'layer', 'weight' or 'none'
     ssrn_basic_block = 'residual'  # 'highway', 'gated_conv' or 'residual'

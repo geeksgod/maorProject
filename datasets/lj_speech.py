@@ -7,7 +7,7 @@ import numpy as np
 
 from torch.utils.data import Dataset
 
-vocab = "PE abcdefghijklmnopqrstuvwxyz'.?"  # P: Padding, E: EOS.
+vocab = "PE ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱलळऴवशषसहऺऻ़ऽािीुूृॄॅॆेैॉॊोौ्ॎॏॐ॒॑॓॔ॕॖॗक़ख़ग़ज़ड़ढ़फ़य़ॠॡॢॣ।॥०१२३४५६७८९॰ॱॲॳॴॵॶॷॸॹॺॻॼॽॾॿ"  # P: Padding, E: EOS.
 char2idx = {char: idx for idx, char in enumerate(vocab)}
 idx2char = {idx: char for idx, char in enumerate(vocab)}
 

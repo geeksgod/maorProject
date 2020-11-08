@@ -5,37 +5,41 @@ import numpy as np
 
 from torch.utils.data import Dataset
 
-vocab = "PE абвгдеёжзийклмноөпрстуүфхцчшъыьэюя-.,!?"  # P: Padding, E: EOS.
+vocab = "PE ऄअआइईउऊऋऌऍऎएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनऩपफबभमयरऱलळऴवशषसहऺऻ़ऽािीुूृॄॅॆेैॉॊोौ्ॎॏॐ॒॑॓॔ॕॖॗक़ख़ग़ज़ड़ढ़फ़य़ॠॡॢॣ।॥०१२३४५६७८९॰ॱॲॳॴॵॶॷॸॹॺॻॼॽॾॿ?'ं"  # P: Padding, E: EOS.
 char2idx = {char: idx for idx, char in enumerate(vocab)}
 idx2char = {idx: char for idx, char in enumerate(vocab)}
 
 
 def text_normalize(text):
-    text = text.lower()
+    #text = text.lower()
     # text = text.replace(",", "'")
     # text = text.replace("!", "?")
-    for c in "-—:":
-        text = text.replace(c, "-")
-    for c in "()\"«»“”'":
-        text = text.replace(c, ",")
+   # for c in "-—:":
     return text
 
 
 def read_metadata(metadata_file):
+    
     fnames, text_lengths, texts = [], [], []
     transcript = os.path.join(metadata_file)
     lines = codecs.open(transcript, 'r', 'utf-8').readlines()
     for line in lines:
-        fname, _, text = line.strip().split("|")
+        try:
+            fname, _, text = line.strip().split("|")
 
-        fnames.append(fname)
-
-        text = text_normalize(text) + "E"  # E: EOS
-        text = [char2idx[char] for char in text]
-        text_lengths.append(len(text))
-        texts.append(np.array(text, np.long))
-
+           
+        
+            text = text_normalize(text) + "E"  # E: EOS
+            text = [char2idx[char] for char in text]
+            text_lengths.append(len(text))
+            texts.append(np.array(text, np.long))
+            fnames.append(fname)
+        except:
+            pass 
+        
+            
     return fnames, text_lengths, texts
+    
 
 
 def get_test_data(sentences, max_n):
